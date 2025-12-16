@@ -1,6 +1,8 @@
 @tool
 extends EditorPlugin
 
+#minor change comment
+
 
 func _enable_plugin() -> void:
 	# Add autoloads here.

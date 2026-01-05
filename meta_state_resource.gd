@@ -98,3 +98,6 @@ func make(s: StringName, v: Variant) -> void:
 	else:
 		stats.push_back(mio.Stat.new(s, v))
 		post()
+func read(s: StringName) -> float:
+	if check(s): return sfind(s).actual
+	else: return 0.

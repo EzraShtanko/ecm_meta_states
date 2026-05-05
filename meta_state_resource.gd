@@ -40,8 +40,9 @@ func inflict(x: MetaEffect, params: Dictionary = {}) -> void:
 		else:							e._add(x.duplicate(), params)
 	else:
 		var xn = x.duplicate()
-		effects.push_back(xn)
-		effects.sort_custom(MetaStateResource.sort_by_priority)
+		if not xn.immediate:
+			effects.push_back(xn)
+			effects.sort_custom(MetaStateResource.sort_by_priority)
 		xn._inflict(self, params)
 	changed.emit()
 	post()

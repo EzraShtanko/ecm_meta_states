@@ -4,7 +4,8 @@
 class_name MetaEffect
 extends Resource
 
-var effect_name: StringName = &"untitled_effect"
+var effect_name			: StringName 		= &"untitled_effect"
+var immediate			: bool 				= false
 
 @abstract func _init()
 

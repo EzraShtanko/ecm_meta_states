@@ -4,6 +4,7 @@ class_name MetaStateResource
 extends Resource
 
 signal updated
+signal impacted(x: MetaEffect)
 
 @export var update: float = 0.5:
 	set(v): update = clampf(v, 0., 10.)
@@ -33,7 +34,7 @@ var reconfig_base: ReconfigBase = ReconfigBase.new(self)
 func post(params: Dictionary = {}) -> void: 
 	reconfig_base.post()
 	_post(params)
-func inflict(x: MetaEffect, params: Dictionary = {}) -> void:	
+func inflict(x: MetaEffect, params: Dictionary = {}) -> void:
 	if check(x.effect_name):
 		var e: MetaEffect = 			efind(x.effect_name)
 		if x._negates(e, params):		lift(e)
@@ -44,6 +45,7 @@ func inflict(x: MetaEffect, params: Dictionary = {}) -> void:
 			effects.push_back(xn)
 			effects.sort_custom(MetaStateResource.sort_by_priority)
 		xn._inflict(self, params)
+	impacted.emit(x)
 	changed.emit()
 	post()
 func lift(x: MetaEffect) -> void:
